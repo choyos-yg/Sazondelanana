@@ -7,10 +7,11 @@
 const WHATSAPP_NUMBER = '34000000000';
 
 const PRODUCTS = {
-  'emp-carne':   { name: 'Empanada de carne' },
-  'emp-pollo':   { name: 'Empanada de pollo' },
-  'arepa-paisa': { name: 'Arepa paisa' },
-  'arepa-queso': { name: 'Arepa de queso' },
+  'emp-carne':    { name: 'Empanada de carne' },
+  'emp-pollo':    { name: 'Empanada de pollo' },
+  'pastel-pollo': { name: 'Pastel de pollo' },
+  'arepa-paisa':  { name: 'Arepa paisa' },
+  'arepa-queso':  { name: 'Arepa de queso' },
 };
 
 const cart = new Map(); // id -> qty
