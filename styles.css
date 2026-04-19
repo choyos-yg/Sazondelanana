@@ -1,6 +1,6 @@
 :root {
-  --cream: #FFF8E7;
-  --cream-dark: #F5E9C8;
+  --cream: #FEFEFE;
+  --cream-dark: #F0E6CC;
   --yellow: #FFCB2E;
   --yellow-soft: #FFE27A;
   --yellow-dark: #E6A91C;
@@ -30,10 +30,7 @@ html, body {
 }
 
 body {
-  background:
-    radial-gradient(circle at 10% 10%, rgba(255,203,46,0.18), transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(206,17,38,0.10), transparent 45%),
-    var(--cream);
+  background: var(--cream);
   min-height: 100vh;
   padding-bottom: 120px;
 }
@@ -53,8 +50,7 @@ body {
 .hero {
   padding: 28px 20px 24px;
   text-align: center;
-  background:
-    linear-gradient(180deg, rgba(255,203,46,0.18), transparent 70%);
+  background: var(--cream);
 }
 .hero-inner {
   max-width: 640px;
@@ -338,6 +334,7 @@ body {
   position: relative;
   z-index: 1;
   font-weight: 700;
+  color: var(--brown-dark);
 }
 .section-title::before {
   content: '';
