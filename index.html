@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#CE1126" />
+  <title>Sazón de la Nana — El verdadero sabor de Colombia</title>
+  <meta name="description" content="Auténtica comida colombiana en Tenerife. Empanadas y arepas hechas 100% maíz, con la mejor sazón." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="flag-ribbon" aria-hidden="true">
+    <span class="stripe stripe-yellow"></span>
+    <span class="stripe stripe-blue"></span>
+    <span class="stripe stripe-red"></span>
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <img src="assets/logo.png" alt="Sazón de la Nana" class="logo" id="heroLogo" onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='block';" />
+      <div class="hero-fallback" id="heroFallback">
+        <div class="badge-colombia">🇨🇴 Auténtica comida colombiana en Tenerife</div>
+        <h1 class="brand">Sazón <span class="brand-de">de la</span> Nana</h1>
+        <p class="tagline-top">— Hecho con amor, como en casa —</p>
+      </div>
+      <div class="ribbon">El verdadero sabor de Colombia</div>
+      <p class="subtag">Hecho 100% maíz · Recetas caseras y tradición</p>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>Te transportamos a Colombia con cada bocado. 🥟🫓</p>
+  </section>
+
+  <main class="menu" aria-label="Menú">
+    <h2 class="section-title"><span>Nuestro menú</span></h2>
+
+    <div class="category">
+      <h3 class="cat-title">Empanadas <span class="cat-sub">de carne y pollo</span></h3>
+      <div class="grid">
+        <article class="card" data-id="emp-carne">
+          <div class="card-emoji">🥟</div>
+          <h4>Empanada de carne</h4>
+          <p>Masa crocante 100% maíz, rellena de carne desmechada bien sazonada.</p>
+          <div class="qty">
+            <button class="qty-btn" data-action="dec" aria-label="Quitar">−</button>
+            <span class="qty-value" data-qty>0</span>
+            <button class="qty-btn" data-action="inc" aria-label="Agregar">+</button>
+          </div>
+        </article>
+
+        <article class="card" data-id="emp-pollo">
+          <div class="card-emoji">🥟</div>
+          <h4>Empanada de pollo</h4>
+          <p>Masa dorada de maíz con relleno jugoso de pollo deshebrado.</p>
+          <div class="qty">
+            <button class="qty-btn" data-action="dec" aria-label="Quitar">−</button>
+            <span class="qty-value" data-qty>0</span>
+            <button class="qty-btn" data-action="inc" aria-label="Agregar">+</button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="category">
+      <h3 class="cat-title">Arepas <span class="cat-sub">paisas y de queso</span></h3>
+      <div class="grid">
+        <article class="card" data-id="arepa-paisa">
+          <div class="card-emoji">🫓</div>
+          <h4>Arepa paisa</h4>
+          <p>Arepa blanca tradicional del campo paisa. Perfecta con mantequilla y quesito.</p>
+          <div class="qty">
+            <button class="qty-btn" data-action="dec" aria-label="Quitar">−</button>
+            <span class="qty-value" data-qty>0</span>
+            <button class="qty-btn" data-action="inc" aria-label="Agregar">+</button>
+          </div>
+        </article>
+
+        <article class="card" data-id="arepa-queso">
+          <div class="card-emoji">🧀</div>
+          <h4>Arepa de queso</h4>
+          <p>Rellena de queso fundido, crujiente por fuera y tierna por dentro.</p>
+          <div class="qty">
+            <button class="qty-btn" data-action="dec" aria-label="Quitar">−</button>
+            <span class="qty-value" data-qty>0</span>
+            <button class="qty-btn" data-action="inc" aria-label="Agregar">+</button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="pay-note">
+      <span class="pay-pill">💳 Bizum</span>
+      <span class="pay-pill">💵 Efectivo</span>
+      <p>Pago al recoger · Recogida entre familia y amigos 💛</p>
+    </div>
+  </main>
+
+  <button id="cartBtn" class="cart-fab" aria-label="Ver pedido" hidden>
+    <span class="fab-icon">🛒</span>
+    <span class="fab-text">Ver pedido</span>
+    <span class="count" id="cartCount">0</span>
+  </button>
+
+  <div id="cartPanel" class="cart-panel" aria-hidden="true" role="dialog" aria-label="Tu pedido">
+    <div class="cart-head">
+      <h3>Tu pedido</h3>
+      <button class="cart-close" id="cartClose" aria-label="Cerrar">✕</button>
+    </div>
+    <ul class="cart-list" id="cartList"></ul>
+    <div class="cart-form">
+      <label>
+        Tu nombre
+        <input type="text" id="custName" placeholder="Ej: María" autocomplete="name" />
+      </label>
+      <label>
+        Notas (opcional)
+        <textarea id="custNotes" rows="2" placeholder="Ej: Paso a recoger mañana por la tarde"></textarea>
+      </label>
+    </div>
+    <button class="send-btn" id="sendBtn">
+      <span class="wa-icon" aria-hidden="true">💬</span>
+      Enviar pedido por WhatsApp
+    </button>
+    <p class="send-hint">Se abrirá WhatsApp con tu pedido listo para enviar.</p>
+  </div>
+
+  <div class="backdrop" id="backdrop" hidden></div>
+
+  <footer>
+    <p class="heart">Hecho con ❤️ por la familia</p>
+    <p class="loc">Tenerife · Islas Canarias</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
