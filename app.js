@@ -7,12 +7,14 @@
 const WHATSAPP_NUMBER = '34000000000';
 
 const PRODUCTS = {
-  'emp-carne':    { name: 'Empanada de carne' },
-  'emp-pollo':    { name: 'Empanada de pollo' },
-  'pastel-pollo': { name: 'Pastel de pollo' },
-  'arepa-paisa':  { name: 'Arepa paisa' },
-  'arepa-queso':  { name: 'Arepa de queso' },
+  'emp-carne':    { name: 'Empanada de carne', price: 1.50, unit: 'unidad' },
+  'emp-pollo':    { name: 'Empanada de pollo', price: 1.50, unit: 'unidad' },
+  'pastel-pollo': { name: 'Pastel de pollo',   price: 3.50, unit: 'unidad' },
+  'arepa-paisa':  { name: 'Arepa paisa',       price: 8.00, unit: 'paquete de 10' },
+  'arepa-queso':  { name: 'Arepa de queso',    price: 7.50, unit: 'paquete de 5' },
 };
+
+const eu = n => n.toFixed(2).replace('.', ',') + ' €';
 
 const cart = new Map(); // id -> qty
 
@@ -49,13 +51,22 @@ function totalItems() {
   return t;
 }
 
+function totalPrice() {
+  let t = 0;
+  for (const [id, q] of cart.entries()) t += PRODUCTS[id].price * q;
+  return t;
+}
+
 function renderCart() {
   const total = totalItems();
   cartCount.textContent = total;
   cartBtn.hidden = total === 0;
 
+  const totalEl = $('#cartTotal');
+
   if (total === 0) {
     cartList.innerHTML = '<li class="cart-empty">Tu pedido está vacío — agrega algo rico 🥟</li>';
+    if (totalEl) totalEl.textContent = eu(0);
     sendBtn.disabled = true;
     return;
   }
@@ -63,13 +74,22 @@ function renderCart() {
   sendBtn.disabled = false;
   cartList.innerHTML = '';
   for (const [id, qty] of cart.entries()) {
+    const p = PRODUCTS[id];
+    const subtotal = p.price * qty;
     const li = document.createElement('li');
     li.innerHTML = `
-      <span class="item-name">${PRODUCTS[id].name}</span>
-      <span class="item-qty">× ${qty}</span>
+      <div class="item-main">
+        <span class="item-name">${p.name}</span>
+        <span class="item-sub">${eu(p.price)} / ${p.unit}</span>
+      </div>
+      <div class="item-right">
+        <span class="item-qty">× ${qty}</span>
+        <span class="item-subtotal">${eu(subtotal)}</span>
+      </div>
     `;
     cartList.appendChild(li);
   }
+  if (totalEl) totalEl.textContent = eu(totalPrice());
 }
 
 // ---------- Cart open/close ----------
@@ -106,8 +126,11 @@ sendBtn.addEventListener('click', () => {
   lines.push('¡Hola Nana! 👋 Quiero hacer un pedido:');
   lines.push('');
   for (const [id, qty] of cart.entries()) {
-    lines.push(`• ${qty} × ${PRODUCTS[id].name}`);
+    const p = PRODUCTS[id];
+    lines.push(`• ${qty} × ${p.name} (${p.unit}) — ${eu(p.price * qty)}`);
   }
+  lines.push('');
+  lines.push(`Total: ${eu(totalPrice())}`);
   lines.push('');
   if (name)  lines.push(`Nombre: ${name}`);
   if (notes) lines.push(`Notas: ${notes}`);
